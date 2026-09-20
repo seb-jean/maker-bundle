@@ -1,0 +1,22 @@
+The <info>%command.name%</info> command generates a CI configuration file for your project.
+
+<info>php %command.full_name%</info>
+
+The command asks which CI platform you want to use, which PHP version the CI should
+run on and, when Doctrine is installed, which database the tests run against. All of
+them can be passed as options:
+
+<info>php %command.full_name% --platform=github --php-version=8.4 --database=postgres</info>
+
+Supported platforms are <comment>github</comment> (generates <comment>.github/workflows/ci.yml</comment>) and
+<comment>gitlab</comment> (generates <comment>.gitlab-ci.yml</comment>). Supported databases are <comment>postgres</comment>,
+<comment>mysql</comment> and <comment>none</comment>.
+
+If the <info>--php-version</info> option is missing, the version is read from the <comment>php</comment>
+requirement of your <comment>composer.json</comment> file. If the <info>--database</info> option is missing,
+it is read from the <comment>DATABASE_URL</comment> environment variable of your <comment>.env</comment> file.
+
+The generated file only contains the jobs and the steps that make sense for your
+project: the tests, the database setup, the Twig, translation and asset linting, the
+coding standards and the static analysis are added when the related packages are
+required in your <comment>composer.json</comment> file.
